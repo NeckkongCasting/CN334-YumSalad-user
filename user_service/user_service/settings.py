@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'user_management',
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [

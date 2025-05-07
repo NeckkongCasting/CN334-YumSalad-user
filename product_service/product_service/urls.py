@@ -16,7 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from product_management.views import ProductListView  # ดึง view มาใช้ตรง ๆ
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('product/', ProductListView.as_view(), name='product-list'),  # เชื่อมตรง
 ]
+
+
