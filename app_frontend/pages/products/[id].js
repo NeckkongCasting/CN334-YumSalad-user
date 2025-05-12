@@ -1,21 +1,38 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import sampleProducts from "@/data/products";
-import { useCart } from '@/context/CartContext';
-
+import { useEffect, useState } from "react";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductDetailPage() {
   const router = useRouter();
   const { id } = router.query;
   const { addToCart } = useCart();
 
-  const product = sampleProducts.find((p) => p.id === id);
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // เพิ่ม state สำหรับจำนวนสินค้า
   const [quantity, setQuantity] = useState(1);
   const [option, setOption] = useState(1);
 
-  if (!product) return <div>Loading...</div>;
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchProduct = async () => {
+      try {
+        const res = await fetch("http://localhost:3341/product/");
+        const data = await res.json();
+        const found = data.find((p) => p.id.toString() === id);
+        setProduct(found);
+      } catch (err) {
+        console.error("Failed to fetch product:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+
+  if (loading || !product) return <div>Loading...</div>;
 
   return (
     <div className="max-w-3xl mx-auto bg-gray-100 p-4 rounded shadow">
@@ -27,14 +44,10 @@ export default function ProductDetailPage() {
         />
         <div className="flex-1 space-y-4">
           <h2 className="text-black font-bold">{product.name}</h2>
-          <p className="text-black font-semibold text-lg">
-            {product.description}
-          </p>
-          <p className="text-green-700 font-semibold text-lg">
-            ฿{product.price} / Bowl
-          </p>
+          <p className="text-black font-semibold text-lg">{product.description}</p>
+          <p className="text-green-700 font-semibold text-lg">฿{product.price} / Bowl</p>
 
-          {/* จำนวนสินค้า */}
+          {/* Quantity */}
           <div className="flex gap-4 items-center">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -51,7 +64,7 @@ export default function ProductDetailPage() {
             </button>
           </div>
 
-          {/* ตัวเลือกเพิ่มเติม */}
+          {/* Option */}
           <div className="flex gap-2 items-center">
             <span>option</span>
             <button
@@ -75,7 +88,6 @@ export default function ProductDetailPage() {
           >
             ADD TO CART
           </button>
-
         </div>
       </div>
     </div>
