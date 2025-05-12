@@ -31,7 +31,7 @@ export default function ProductDetailPage() {
             {product.description}
           </p>
           <p className="text-green-700 font-semibold text-lg">
-            ฿{product.price} / Car
+            ฿{product.price} / Bowl
           </p>
 
           {/* จำนวนสินค้า */}
