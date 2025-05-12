@@ -47,7 +47,6 @@ export default function ProductDetailPage() {
           <p className="text-black font-semibold text-lg">{product.description}</p>
           <p className="text-green-700 font-semibold text-lg">฿{product.price} / Bowl</p>
 
-          {/* Quantity */}
           <div className="flex gap-4 items-center">
             <button
               onClick={() => setQuantity((q) => Math.max(1, q - 1))}
@@ -64,7 +63,6 @@ export default function ProductDetailPage() {
             </button>
           </div>
 
-          {/* Option */}
           <div className="flex gap-2 items-center">
             <span>option</span>
             <button
