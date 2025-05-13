@@ -17,11 +17,13 @@ export default function ProductSelectionPage() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {products.map((product) => (
           <div key={product.id} className="border rounded p-2 text-center">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="mx-auto mb-2 rounded"
-            />
+            <Link href={`/products/${product.id}`}>
+              <img
+                src={product.image}
+                alt={product.name}
+                className="mx-auto mb-2 rounded cursor-pointer"
+              />
+            </Link>
             <p>{product.name}</p>
             <p>{product.price}฿</p>
             <Link

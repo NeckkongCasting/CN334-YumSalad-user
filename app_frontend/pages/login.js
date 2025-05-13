@@ -15,16 +15,19 @@ export default function LoginPage() {
         body: JSON.stringify({ username, password }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        const data = await res.json();
         throw new Error(data.detail || 'Login failed');
       }
 
-      const data = await res.json();
+      // ✅ Save token
+      localStorage.setItem('access_token', data.access);
+      localStorage.setItem('refresh_token', data.refresh);
       alert('Login successful!');
-      // บันทึก token ไว้ หรือ redirect ไปหน้าอื่น
-      // localStorage.setItem("token", data.token);
-      router.push('/');
+
+      // ✅ Redirect
+      router.push('/profile'); // เปลี่ยนหน้าได้ตามต้องการ
     } catch (err) {
       alert(err.message);
     }
