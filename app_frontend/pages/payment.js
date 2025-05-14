@@ -29,7 +29,7 @@ export default function PaymentPage() {
       
       <div className="flex justify-center mb-4">
         <img
-          src="https://promptpay.io/0912345678.png?amount=100.00"
+          src="https://promptpay.io/0625949595.png?amount=100.00"
           alt="QR Code Payment"
           className="w-64 h-64 border"
         />
