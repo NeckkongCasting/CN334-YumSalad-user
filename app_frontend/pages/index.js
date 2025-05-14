@@ -6,7 +6,6 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ดึงข้อมูลสินค้าจาก API
     const fetchProducts = async () => {
       try {
         const response = await fetch('http://localhost:3341/product/');
