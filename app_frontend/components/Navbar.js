@@ -16,7 +16,6 @@ export default function Navbar() {
       </div>
       <div className="flex gap-4 items-center">
         <Link href="/cart">🛒</Link>
-
         <Link href="/login">👤</Link>
       </div>
     </nav>
