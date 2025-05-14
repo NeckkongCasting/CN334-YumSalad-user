@@ -17,12 +17,7 @@ export default function Navbar() {
       <div className="flex gap-4 items-center">
         <Link href="/cart">🛒</Link>
 
-        <Link href="/profile">👤</Link>
-        <input
-          type="text"
-          placeholder="ค้นหา"
-          className="rounded px-2 py-1 ml-2"
-        />
+        <Link href="/login">👤</Link>
       </div>
     </nav>
 

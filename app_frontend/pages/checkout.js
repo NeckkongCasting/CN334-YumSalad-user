@@ -28,8 +28,6 @@ export default function CheckoutPage() {
       return;
     }
 
-    // ยังไม่เคลียร์ cart ตอนนี้ รอชำระเงิน
-    // ไปหน้า payment
     router.push('/payment');
   };
 
