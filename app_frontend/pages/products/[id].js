@@ -62,24 +62,7 @@ export default function ProductDetailPage() {
               +
             </button>
           </div>
-
-          <div className="flex gap-2 items-center">
-            <span>option</span>
-            <button
-              onClick={() => setOption((o) => Math.max(1, o - 1))}
-              className="bg-gray-300 px-2"
-            >
-              -
-            </button>
-            <span>{option}</span>
-            <button
-              onClick={() => setOption((o) => o + 1)}
-              className="bg-gray-300 px-2"
-            >
-              +
-            </button>
-          </div>
-
+          
           <button
             onClick={() => addToCart(product, quantity)}
             className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded mt-2"

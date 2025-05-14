@@ -39,7 +39,7 @@ export default function CartPage() {
                     >
                       -
                     </button>
-                    <span className="text-lg">{item.quantity}</span>
+                    <span className="text-lg bg-gray-200 px-4 py-1 rounded-lg">{item.quantity}</span> 
                     <button 
                       onClick={() => updateQuantity(item.id, 1)} 
                       className="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-full text-lg"
@@ -55,11 +55,11 @@ export default function CartPage() {
                   </div>
                 </div>
               </div>
-              <p className="font-bold text-xl text-green-700">฿{item.price * item.quantity}</p>
+              <p className="font-bold text-xl text-black">฿{item.price * item.quantity}</p>
             </div>
           ))}
 
-          <div className="text-right font-bold text-2xl text-green-800 mt-4">
+          <div className="text-right font-bold text-2xl text-black mt-4">
             รวมทั้งสิ้น: ฿{total}
           </div>
 
