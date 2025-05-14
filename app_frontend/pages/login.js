@@ -21,29 +21,42 @@ export default function LoginPage() {
         throw new Error(data.detail || 'Login failed');
       }
 
-      // ✅ Save token
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
       alert('Login successful!');
-
-      // ✅ Redirect
-      router.push('/profile'); // เปลี่ยนหน้าได้ตามต้องการ
+      router.push('/');
     } catch (err) {
       alert(err.message);
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg.jpg')" }}>
-      <form className="bg-white p-8 rounded shadow-md w-full max-w-md" onSubmit={handleSubmit}>
-        <h2 className="text-2xl text-black font-bold mb-6 text-center">LOGIN</h2>
+    <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://images.squarespace-cdn.com/content/v1/5c9047d7a09a7e36047930c5/1628920669405-GTAO3R9I81VDSS2R6A54/Foods+_+Roots_6015.jpg')",
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-xl shadow-md w-full max-w-md"
+      >
+        <h2 className="text-2xl text-black font-bold mb-6 text-center">
+          SIGN IN
+        </h2>
+        <img
+          src="https://th.bing.com/th/id/R.ce9dd1615321df47b7b7f3f3f4e6a73b?rik=ZXTMSGi4dy2qMQ&riu=http%3a%2f%2fnoblesfonteinprojects.co.za%2fwp-content%2fuploads%2f2023%2f06%2fprofile4.jpg&ehk=PcnywifoTVWdZz6jjUzwh4p631a45EEDggSfBLh58cc%3d&risl=&pid=ImgRaw&r=0"
+          alt="profile"
+          className="mb-4 rounded-full w-[100px] h-[100px] object-cover mx-auto"
+        />
         <input
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full mb-4 p-2 border rounded text-white"
-          style={{ backgroundColor: "rgba(189, 188, 188, 0.8)" }}
+          className="w-full mb-4 p-2 border rounded text-white placeholder-white"
+          style={{ backgroundColor: 'rgba(189, 188, 188, 0.8)' }}
           required
         />
         <input
@@ -51,14 +64,21 @@ export default function LoginPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-4 p-2 border rounded text-white"
-          style={{ backgroundColor: "rgba(189, 188, 188, 0.8)" }}
+          className="w-full mb-4 p-2 border rounded text-white placeholder-white"
+          style={{ backgroundColor: 'rgba(189, 188, 188, 0.8)' }}
           required
         />
-        <a href="/signup" className="text-black hover:underline mb-4 block text-center">
+        <a
+          href="/signup"
+          className="text-black hover:underline mb-4 block text-center"
+        >
           Don't have an account? Sign up
         </a>
-        <button type="submit" className="w-full text-white p-2 rounded" style={{ backgroundColor: "rgba(22, 97, 27, 0.8)" }}>
+        <button
+          type="submit"
+          className="w-full text-white p-2 rounded hover:bg-green-900"
+          style={{ backgroundColor: 'rgba(22, 97, 27, 0.8)' }}
+        >
           SUBMIT
         </button>
       </form>

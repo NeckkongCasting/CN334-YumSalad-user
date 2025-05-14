@@ -23,8 +23,13 @@ export default function SignupPage() {
 
       if (!res.ok) {
         const data = await res.json();
-        throw new Error(data.detail || 'Registration failed');
+        const errorDetail =
+          data.detail ||
+          Object.values(data).flat().join('\n') || 
+          'Registration failed';
+        throw new Error(errorDetail);
       }
+
 
       alert('Registration successful!');
       router.push('/login');
@@ -34,16 +39,27 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/bg.jpg')" }}>
-      <form className="bg-white p-8 rounded shadow-md w-full max-w-md" onSubmit={handleSubmit}>
-        <h2 className="text-2xl text-black font-bold mb-6 text-center">SIGN UP</h2>
+    <div
+      className="flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url('https://images.squarespace-cdn.com/content/v1/5c9047d7a09a7e36047930c5/1628920669405-GTAO3R9I81VDSS2R6A54/Foods+_+Roots_6015.jpg')",
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-xl shadow-md w-full max-w-md"
+      >
+        <h2 className="text-2xl text-black font-bold mb-6 text-center">
+          SIGN UP
+        </h2>
         <input
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="w-full mb-4 p-2 border rounded text-white"
-          style={{ backgroundColor: "rgba(189, 188, 188, 0.8)" }}
+          className="w-full mb-4 p-2 border rounded text-white placeholder-white"
+          style={{ backgroundColor: 'rgba(189, 188, 188, 0.8)' }}
           required
         />
         <input
@@ -51,8 +67,8 @@ export default function SignupPage() {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-4 p-2 border rounded text-white"
-          style={{ backgroundColor: "rgba(189, 188, 188, 0.8)" }}
+          className="w-full mb-4 p-2 border rounded text-white placeholder-white"
+          style={{ backgroundColor: 'rgba(189, 188, 188, 0.8)' }}
           required
         />
         <input
@@ -60,11 +76,15 @@ export default function SignupPage() {
           placeholder="Confirm Password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="w-full mb-4 p-2 border rounded text-white"
-          style={{ backgroundColor: "rgba(189, 188, 188, 0.8)" }}
+          className="w-full mb-4 p-2 border rounded text-white placeholder-white"
+          style={{ backgroundColor: 'rgba(189, 188, 188, 0.8)' }}
           required
         />
-        <button type="submit" className="w-full text-white p-2 rounded" style={{ backgroundColor: "rgba(22, 97, 27, 0.8)" }}>
+        <button
+          type="submit"
+          className="w-full text-white p-2 rounded hover:bg-green-900"
+          style={{ backgroundColor: 'rgba(22, 97, 27, 0.8)' }}
+        >
           SUBMIT
         </button>
       </form>
