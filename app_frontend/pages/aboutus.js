@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 
 export default function AboutUs() {
-    useEffect(() => {
-        document.body.style.backgroundColor = "#ffffff";
-    }, []);
 
     return (
         <div>
