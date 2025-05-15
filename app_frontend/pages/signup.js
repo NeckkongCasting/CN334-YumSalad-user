@@ -15,10 +15,18 @@ export default function SignupPage() {
     }
 
     try {
-      const res = await fetch('https://cn334-yumsalad-back.onrender.com/api/register', {
+      const res = await fetch('https://cn334-yumsalad-back.onrender.com/api/register/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ 
+          username, 
+          password,
+          fullname: username,
+          address: "",
+          province: "",
+          post_code: "",
+          tel: ""
+        }),
       });
 
       if (!res.ok) {
@@ -29,7 +37,6 @@ export default function SignupPage() {
           'Registration failed';
         throw new Error(errorDetail);
       }
-
 
       alert('Registration successful!');
       router.push('/login');

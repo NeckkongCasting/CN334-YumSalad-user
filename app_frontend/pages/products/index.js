@@ -6,7 +6,7 @@ export default function ProductSelectionPage() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:3341/product/")
+    axios.get("https://cn334-yumsalad-back.onrender.com/product/")
       .then((res) => setProducts(res.data))
       .catch((err) => console.error("Failed to fetch products:", err));
   }, []);

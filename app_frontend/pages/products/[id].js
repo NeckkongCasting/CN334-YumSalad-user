@@ -18,7 +18,7 @@ export default function ProductDetailPage() {
 
     const fetchProduct = async () => {
       try {
-        const res = await fetch("http://localhost:3341/product/");
+        const res = await fetch("https://cn334-yumsalad-back.onrender.com/product/");
         const data = await res.json();
         const found = data.find((p) => p.id.toString() === id);
         setProduct(found);

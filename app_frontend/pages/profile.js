@@ -9,7 +9,7 @@ const ProfilePage = () => {
 
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:3342/api/orders/', {
+        const response = await fetch('https://cn334-yumsalad-back.onrender.com/api/orders/', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${yourAuthToken}`,
