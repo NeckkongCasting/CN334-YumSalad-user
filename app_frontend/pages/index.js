@@ -8,7 +8,7 @@ export default function HomePage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://localhost:3341/product/');
+        const response = await fetch('https://cn334-yumsalad-back.onrender.com/product/');
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }

@@ -84,10 +84,18 @@ WSGI_APPLICATION = 'product_service.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/mysite',
+        default='postgresql://postgres:postgres@localhost:5432/yumsalad',
         conn_max_age=600
     )
 }
+
+# Comment out the original database configuration
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default='postgresql://postgres:postgres@localhost:5432/mysite',
+#         conn_max_age=600
+#     )
+# }
 
 
 # Password validation
