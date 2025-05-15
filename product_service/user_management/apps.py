@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 
 class UserConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'YumSalad' 
+    name = 'user_management' 
 
     def ready(self):
         User = get_user_model()
