@@ -2,7 +2,7 @@ services:
   - type: web
     name: yumsalad-backend
     env: python
-    buildCommand: cd product_service && ./build.sh
+    buildCommand: pip install -r product_service/requirements.txt && python product_service/manage.py migrate && python product_service/manage.py collectstatic --no-input
     startCommand: cd product_service && gunicorn product_service.wsgi:application
     envVars:
       - key: DATABASE_URL
@@ -17,6 +17,8 @@ services:
         value: product_service.settings
       - key: ALLOWED_HOSTS
         value: .onrender.com
+      - key: DEBUG
+        value: "False"
 
   - type: web
     name: yumsalad-frontend
