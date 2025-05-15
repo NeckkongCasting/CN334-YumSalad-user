@@ -83,10 +83,14 @@ WSGI_APPLICATION = 'product_service.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://postgres:postgres@localhost:5432/yumsalad',
-        conn_max_age=600
-    )
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_NAME'),
+        'USER': os.environ.get('POSTGRES_USER'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
+        'HOST': 'db', 
+        'PORT': 5432,
+        }
 }
 
 # Comment out the original database configuration
