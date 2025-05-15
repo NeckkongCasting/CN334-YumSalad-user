@@ -1,62 +1,22 @@
 services:
   - type: web
-    name: yumsalad-backend
+    name: cn334-yumsalad-back
     env: python
-    buildCommand: |
-      pip install -r requirements.txt && 
-      cd product_service && 
-      python manage.py migrate && 
-      python manage.py collectstatic --no-input &&
-      if [ "$CREATE_SUPERUSER" = "true" ]; then
-        echo "Creating superuser..."
-        DJANGO_SUPERUSER_USERNAME=$DJANGO_SUPERUSER_USERNAME \
-        DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL \
-        DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD \
-        python manage.py createsuperuser --noinput || true
-      fi
-    startCommand: cd product_service && gunicorn --chdir product_service product_service.wsgi:application
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: gunicorn product_service.wsgi:application
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: yumsalad-db
-          property: connectionString
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: cn334-yumsalad-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
       - key: DEBUG
-        value: "False"
-      - key: DJANGO_SETTINGS_MODULE
-        value: product_service.settings
-      - key: ALLOWED_HOSTS
-        value: .onrender.com
-      - key: CREATE_SUPERUSER
-        value: "true"
-      - key: DJANGO_SUPERUSER_USERNAME
-        value: admin
-      - key: DJANGO_SUPERUSER_EMAIL
-        value: admin@yumsalad.com
-      - key: DJANGO_SUPERUSER_PASSWORD
-        value: Admin123!
-    buildFilter:
-      paths:
-      - product_service/**
-    rootDirectory: product_service
-    
-  - type: web
-    name: yumsalad-frontend
-    env: node
-    buildCommand: |
-      cd app_frontend &&
-      npm install &&
-      npm run build
-    startCommand: cd app_frontend && npm start
-    envVars:
-      - key: NEXT_PUBLIC_API_URL
-        value: https://yumsalad-backend.onrender.com
-      - key: NODE_ENV
-        value: production
-      - key: NODE_VERSION
-        value: 18.x
-    buildFilter:
-      paths:
-      - app_frontend/**
-    rootDirectory: app_frontend 
+        value: False
+
+databases:
+  - name: cn334-yumsalad-db
+    databaseName: yumsalad
+    plan: free 
