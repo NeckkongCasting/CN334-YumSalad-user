@@ -3,7 +3,7 @@ services:
     name: yumsalad-backend
     env: python
     buildCommand: pip install -r requirements.txt && cd product_service && python manage.py migrate && python manage.py collectstatic --no-input
-    startCommand: cd product_service && gunicorn product_service.wsgi:application
+    startCommand: cd product_service && gunicorn --chdir product_service product_service.wsgi:application
     envVars:
       - key: DATABASE_URL
         fromDatabase:
