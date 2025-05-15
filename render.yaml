@@ -2,7 +2,19 @@ services:
   - type: web
     name: yumsalad-backend
     env: python
-    buildCommand: pip install -r requirements.txt && cd product_service && python manage.py migrate && python manage.py collectstatic --no-input
+    buildCommand: |
+      pip install -r requirements.txt && 
+      cd product_service && 
+      python manage.py migrate && 
+      python manage.py collectstatic --no-input &&
+      if [ "$CREATE_SUPERUSER" = "true" ]; then
+        python manage.py shell -c "
+        from django.contrib.auth import get_user_model;
+        User = get_user_model();
+        if not User.objects.filter(username='$DJANGO_SUPERUSER_USERNAME').exists():
+            User.objects.create_superuser('$DJANGO_SUPERUSER_USERNAME', '$DJANGO_SUPERUSER_EMAIL', '$DJANGO_SUPERUSER_PASSWORD')
+        "
+      fi
     startCommand: cd product_service && gunicorn --chdir product_service product_service.wsgi:application
     envVars:
       - key: DATABASE_URL
@@ -17,6 +29,14 @@ services:
         value: product_service.settings
       - key: ALLOWED_HOSTS
         value: .onrender.com
+      - key: CREATE_SUPERUSER
+        value: "false"
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
     buildFilter:
       paths:
       - product_service/**
