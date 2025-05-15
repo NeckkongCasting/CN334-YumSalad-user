@@ -34,7 +34,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 # Application definition
 
 INSTALLED_APPS = [
-   'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'user_management',
     'rest_framework',
     'corsheaders',
-    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -84,14 +83,10 @@ WSGI_APPLICATION = 'product_service.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'db', 
-        'PORT': 5432,
-        }
+    'default': dj_database_url.config(
+        default='postgresql://postgres:postgres@localhost:5432/yumsalad',
+        conn_max_age=600
+    )
 }
 
 # Comment out the original database configuration
