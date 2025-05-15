@@ -1,0 +1,1 @@
+-r product_service/requirements.txt 
