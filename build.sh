@@ -22,7 +22,9 @@ print('Superuser password has been reset/created successfully')
 "
 
 # Load fixture data
+echo "Loading fixture data..."
 python manage.py loaddata product_data.json
+echo "Fixture data loaded successfully"
 
 # Collect static files
 python manage.py collectstatic --no-input 
