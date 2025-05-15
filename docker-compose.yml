@@ -22,19 +22,19 @@ services:
       - POSTGRES_PASSWORD=cn334Admin
     depends_on:
       - db
-  user_api:
-    build: ./user_service
-    command: python manage.py runserver 0.0.0.0:8888
-    volumes:
-      - ./user_service:/code
-    ports:
-      - "3342:8888"
-    environment:
-      - POSTGRES_NAME=postgres
-      - POSTGRES_USER=cn334Admin
-      - POSTGRES_PASSWORD=cn334Admin
-    depends_on:
-      - db
+  # user_api:
+  #   build: ./app-backend/user_service
+  #   command: python manage.py runserver 0.0.0.0:8888
+  #   volumes:
+  #     - ./user_service:/code
+  #   ports:
+  #     - "3342:8888"
+  #   environment:
+  #     - POSTGRES_NAME=postgres
+  #     - POSTGRES_USER=cn334Admin
+  #     - POSTGRES_PASSWORD=cn334Admin
+  #   depends_on:
+  #     - db
   front_end:
     build: ./app_frontend
     command: npm run dev
