@@ -9,24 +9,41 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log('Attempting login with:', { username });
       const res = await fetch('https://cn334-yumsalad-back.onrender.com/api/token/', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ 
+          username: username.trim(), 
+          password: password 
+        }),
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
-        throw new Error(data.detail || 'Login failed');
+        const data = await res.json();
+        console.error('Login error:', data);
+        if (data.detail) {
+          throw new Error(data.detail);
+        } else if (data.non_field_errors) {
+          throw new Error(data.non_field_errors[0]);
+        } else {
+          throw new Error('Login failed. Please check your credentials.');
+        }
       }
 
+      const data = await res.json();
+      console.log('Login successful');
+      
       localStorage.setItem('access_token', data.access);
       localStorage.setItem('refresh_token', data.refresh);
       alert('Login successful!');
       router.push('/');
     } catch (err) {
-      alert(err.message);
+      console.error('Login error:', err);
+      alert(err.message || 'An error occurred during login');
     }
   };
 
