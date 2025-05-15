@@ -32,11 +32,11 @@ services:
       - key: CREATE_SUPERUSER
         value: "true"
       - key: DJANGO_SUPERUSER_USERNAME
-        value: admin
+        value: yumsalad
       - key: DJANGO_SUPERUSER_EMAIL
         value: prompiriya1421@gmail.com
       - key: DJANGO_SUPERUSER_PASSWORD
-        value: YumSalad@Admin2024
+        value: yumsalad123
     buildFilter:
       paths:
       - product_service/**
