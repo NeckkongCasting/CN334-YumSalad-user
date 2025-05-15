@@ -83,14 +83,10 @@ WSGI_APPLICATION = 'product_service.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
-        'USER': os.environ.get('POSTGRES_USER'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'db', 
-        'PORT': 5432,
-        }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL', 'postgresql://postgres:postgres@localhost:5432/postgres'),
+        conn_max_age=600
+    )
 }
 
 # Password validation
